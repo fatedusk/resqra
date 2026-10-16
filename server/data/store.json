@@ -6,7 +6,7 @@
       "animalType": "Dog",
       "condition": "Injured / Needs treatment",
       "urgency": "Critical",
-      "status": "Reported",
+      "status": "Help Requested",
       "inImmediateDanger": true,
       "description": "Test injured puppy near Sector 12 Noida park",
       "observedSymptoms": "",
@@ -17,7 +17,7 @@
       "reporterName": "Shivansh Patel",
       "reporterPhone": "",
       "createdAt": "2026-10-16T15:48:04.522Z",
-      "updatedAt": "2026-10-16T15:48:04.523Z",
+      "updatedAt": "2026-10-16T18:28:01.472Z",
       "duplicateCandidate": {
         "candidateId": "rep-001",
         "distanceKm": 0,
@@ -551,6 +551,20 @@
   ],
   "alerts": [
     {
+      "id": "alt-1792175173958",
+      "title": "Red Alert",
+      "severity": "Red Alert",
+      "incidentCount": 5,
+      "locationName": "Sector 12, Noida Area",
+      "latitude": 28.5697,
+      "longitude": 77.3208,
+      "radiusMeters": 2500,
+      "status": "active",
+      "details": "Red Alert triggered: 5 recorded incidents (3 bite/aggression events) in Sector 12 area within 24h.",
+      "guidance": "Alert community animal handlers, municipal health teams, and advise residents to keep personal pets on leash and report aggressive behavior.",
+      "createdAt": "2026-10-16T18:26:13.958Z"
+    },
+    {
       "id": "alt-001",
       "title": "Red Alert",
       "severity": "Red Alert",
@@ -559,7 +573,7 @@
       "latitude": 28.5697,
       "longitude": 77.3208,
       "radiusMeters": 2000,
-      "status": "active",
+      "status": "resolved",
       "details": "Cluster of 4 dog bite incidents reported in Sector 12, Noida within the last 24 hours. Local municipal catchers alerted for observation.",
       "guidance": "Exercise extra caution during night walks. Avoid cornering unfamiliar dogs. Keep pets on short leashes.",
       "createdAt": "2026-10-16T11:34:46.938Z"
@@ -612,5 +626,12 @@
       "createdAt": "2026-10-16T03:34:46.938Z"
     }
   ],
-  "duplicateVotes": []
+  "duplicateVotes": [
+    {
+      "reportId": "rep-1792165684522",
+      "candidateId": "rep-001",
+      "vote": "same_case",
+      "timestamp": "2026-10-16T18:27:50.676Z"
+    }
+  ]
 }

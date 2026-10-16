@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Logo } from './Logo';
-import { MapPin, Bell, Sun, Moon, Droplets, ShieldAlert, Heart, Info, Menu, X } from 'lucide-react';
+import { MapPin, Bell, Sun, Moon, Droplets, ShieldAlert, Heart, Info, Menu, X, User } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 import { useAuth } from '../context/AuthContext';
 
@@ -148,12 +148,25 @@ export const Navbar: React.FC = () => {
             to="/profile"
             className="flex items-center gap-2 p-1 pl-1.5 pr-2.5 rounded-full bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:ring-2 hover:ring-emerald-500/20 transition"
           >
-            <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white font-bold text-xs flex items-center justify-center">
-              {user?.fullName?.charAt(0) || 'S'}
-            </div>
-            <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 hidden sm:inline">
-              {user?.fullName || 'Profile'}
-            </span>
+            {user ? (
+              <>
+                <div className="w-7 h-7 rounded-full bg-gradient-to-tr from-emerald-500 to-teal-400 text-white font-bold text-xs flex items-center justify-center">
+                  {user.fullName.charAt(0)}
+                </div>
+                <span className="text-xs font-semibold text-slate-700 dark:text-slate-200 hidden sm:inline">
+                  {user.fullName}
+                </span>
+              </>
+            ) : (
+              <>
+                <div className="w-7 h-7 rounded-full bg-slate-200 dark:bg-slate-700 text-slate-600 dark:text-slate-300 font-bold text-xs flex items-center justify-center">
+                  <User className="w-4 h-4" />
+                </div>
+                <span className="text-xs font-semibold text-emerald-600 dark:text-emerald-400 hidden sm:inline">
+                  Sign In
+                </span>
+              </>
+            )}
           </Link>
 
           {/* Mobile hamburger menu toggle */}
