@@ -59,10 +59,10 @@ export const WelcomePage: React.FC = () => {
         </Link>
 
         <Link
-          to="/home"
+          to="/profile"
           className="w-full py-3 px-6 rounded-2xl border border-slate-300 dark:border-slate-700 hover:border-slate-400 dark:hover:border-slate-600 bg-white/60 dark:bg-slate-800/60 backdrop-blur-md text-slate-700 dark:text-slate-200 font-semibold text-sm flex items-center justify-center transition"
         >
-          Explore Demo Mode
+          Login
         </Link>
       </div>
 
