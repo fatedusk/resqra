@@ -1,12 +1,116 @@
 {
   "reports": [
     {
+      "id": "rep-1792438345427",
+      "caseNumber": "Case AM-2026-0020",
+      "animalType": "Dog",
+      "condition": "Seems ill",
+      "urgency": "Critical",
+      "status": "Under Review",
+      "inImmediateDanger": true,
+      "description": "dog bleeding and deep cuts",
+      "observedSymptoms": "",
+      "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+      "locationName": "Noida Location (28.57001, 77.33139)",
+      "latitude": 28.57001,
+      "longitude": 77.33139,
+      "reporterName": "Shivansh Patel",
+      "reporterPhone": "",
+      "createdAt": "2026-10-19T19:32:25.427Z",
+      "updatedAt": "2026-10-19T19:34:00.429Z",
+      "duplicateCandidate": {
+        "candidateId": "rep-1792267089388",
+        "distanceKm": 1,
+        "description": "Reported within 1 km and 47.6h difference with matching type (Dog).",
+        "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+        "status": "pending"
+      },
+      "aiAssessment": {
+        "id": "ai-1792438345429",
+        "reportId": "rep-1792438345427",
+        "animalDetected": true,
+        "detectedSpecies": "Dog (Dog)",
+        "confidence": 0.94,
+        "imageQuality": "good",
+        "urgencyLevel": "Critical",
+        "urgencyReasoning": "Immediate life-threat detected due to acute physical trauma, respiratory distress, or severe hemorrhage. Visual analysis verifies presence of animal.",
+        "observedEvidence": [
+          "Critical indicators present in clinical notes or reporter flags.",
+          "Animal reported to be in active danger zone (traffic/predator risk)."
+        ],
+        "recommendedSteps": [
+          "Contact the nearest emergency veterinary hospital or NGO animal ambulance right away.",
+          "Keep the animal in a safe, quiet, sheltered spot away from traffic and curious crowds.",
+          "Avoid giving solid food or water if the animal is severely injured or choking.",
+          "Inform the nearest local NGO with the exact Case ID and live coordinates."
+        ],
+        "safetyWarnings": [
+          "Never administer human medications (such as Paracetamol/Ibuprofen); they are fatal to animals.",
+          "An injured or frightened animal may bite defensively; maintain a secure distance."
+        ],
+        "isDemo": true,
+        "createdAt": "2026-10-19T19:32:25.429Z"
+      }
+    },
+    {
+      "id": "rep-1792267089388",
+      "caseNumber": "Case AM-2026-0019",
+      "animalType": "Dog",
+      "condition": "Injured / Needs treatment",
+      "urgency": "Critical",
+      "status": "Reported",
+      "inImmediateDanger": true,
+      "description": "Animal observed requiring assistance.",
+      "observedSymptoms": "",
+      "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+      "locationName": "Sector 12, Noida, UP",
+      "latitude": 28.5697,
+      "longitude": 77.3208,
+      "reporterName": "Shivansh Patel",
+      "reporterPhone": "",
+      "createdAt": "2026-10-17T19:58:09.388Z",
+      "updatedAt": "2026-10-17T19:58:09.392Z",
+      "duplicateCandidate": {
+        "candidateId": "rep-1792165684522",
+        "distanceKm": 0,
+        "description": "Reported within 0 km and 28.2h difference with matching type (Dog).",
+        "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+        "status": "pending"
+      },
+      "aiAssessment": {
+        "id": "ai-1792267089392",
+        "reportId": "rep-1792267089388",
+        "animalDetected": true,
+        "detectedSpecies": "Dog (Dog)",
+        "confidence": 0.94,
+        "imageQuality": "good",
+        "urgencyLevel": "Critical",
+        "urgencyReasoning": "Immediate life-threat detected due to acute physical trauma, respiratory distress, or severe hemorrhage. Visual analysis verifies presence of animal.",
+        "observedEvidence": [
+          "Critical indicators present in clinical notes or reporter flags.",
+          "Animal reported to be in active danger zone (traffic/predator risk)."
+        ],
+        "recommendedSteps": [
+          "Contact the nearest emergency veterinary hospital or NGO animal ambulance right away.",
+          "Keep the animal in a safe, quiet, sheltered spot away from traffic and curious crowds.",
+          "Avoid giving solid food or water if the animal is severely injured or choking.",
+          "Inform the nearest local NGO with the exact Case ID and live coordinates."
+        ],
+        "safetyWarnings": [
+          "Never administer human medications (such as Paracetamol/Ibuprofen); they are fatal to animals.",
+          "An injured or frightened animal may bite defensively; maintain a secure distance."
+        ],
+        "isDemo": true,
+        "createdAt": "2026-10-17T19:58:09.392Z"
+      }
+    },
+    {
       "id": "rep-1792165684522",
       "caseNumber": "Case AM-2026-0018",
       "animalType": "Dog",
       "condition": "Injured / Needs treatment",
       "urgency": "Critical",
-      "status": "Help Requested",
+      "status": "Rejected as Invalid",
       "inImmediateDanger": true,
       "description": "Test injured puppy near Sector 12 Noida park",
       "observedSymptoms": "",
@@ -17,7 +121,7 @@
       "reporterName": "Shivansh Patel",
       "reporterPhone": "",
       "createdAt": "2026-10-16T15:48:04.522Z",
-      "updatedAt": "2026-10-16T18:28:01.472Z",
+      "updatedAt": "2026-10-19T19:35:15.359Z",
       "duplicateCandidate": {
         "candidateId": "rep-001",
         "distanceKm": 0,
@@ -335,6 +439,12 @@
           "name": "Leptospirosis",
           "dueDate": "10 Aug 2026",
           "status": "Upcoming"
+        },
+        {
+          "id": "vac-1792438607356",
+          "name": "Bordetella (Kennel Cough)",
+          "dueDate": "2026-11-20",
+          "status": "Upcoming"
         }
       ],
       "healthRecords": [
@@ -475,13 +585,20 @@
       "animalName": "Luna",
       "story": "Luna, a 4-month-old stray pup, was found with a broken leg in Noida Sector 12. She needs orthopedic pin surgery and post-operative foster care.",
       "targetAmount": 50000,
-      "raisedAmount": 27300,
+      "raisedAmount": 28300,
       "isVerified": true,
       "vetReportAvailable": true,
       "updatesRegularly": true,
       "imageUrl": "https://images.unsplash.com/photo-1537151625747-768eb6cf92b2?auto=format&fit=crop&w=800&q=80",
       "status": "active",
       "donations": [
+        {
+          "id": "don-1792438713332",
+          "donorName": "Kind Supporter",
+          "amount": 1000,
+          "paymentMethod": "UPI (Demo)",
+          "date": "2026-10-19"
+        },
         {
           "id": "don-1792165705482",
           "donorName": "Shivansh Patel",
@@ -581,6 +698,24 @@
   ],
   "incidents": [
     {
+      "id": "inc-1792438345431",
+      "incidentType": "Injured Animal",
+      "locationName": "Noida Location (28.57001, 77.33139)",
+      "latitude": 28.57001,
+      "longitude": 77.33139,
+      "timeAgo": "Just now",
+      "createdAt": "2026-10-19T19:32:25.431Z"
+    },
+    {
+      "id": "inc-1792267089395",
+      "incidentType": "Injured Animal",
+      "locationName": "Sector 12, Noida, UP",
+      "latitude": 28.5697,
+      "longitude": 77.3208,
+      "timeAgo": "Just now",
+      "createdAt": "2026-10-17T19:58:09.395Z"
+    },
+    {
       "id": "inc-1792165684524",
       "incidentType": "Injured Animal",
       "locationName": "Sector 12, Noida, UP",
@@ -632,6 +767,18 @@
       "candidateId": "rep-001",
       "vote": "same_case",
       "timestamp": "2026-10-16T18:27:50.676Z"
+    },
+    {
+      "reportId": "rep-1792438345427",
+      "candidateId": "rep-1792267089388",
+      "vote": "same_case",
+      "timestamp": "2026-10-19T19:33:18.589Z"
+    },
+    {
+      "reportId": "rep-001",
+      "candidateId": "rep-dup-01",
+      "vote": "different_case",
+      "timestamp": "2026-10-19T19:41:34.108Z"
     }
   ]
 }
