@@ -1,8 +1,29 @@
 # ResQra — AI-Powered Animal Rescue & Welfare Platform
 
-> **Tagline:** Every Life Deserves a Rescue.
+> **Tagline:** Every Life Deserves a Rescue.  
+> **Open Source:** Participated in **Hacktoberfest 2026** 🎃  
+> **Built with:** **Google Antigravity** (Advanced Agentic AI Assistant) 🤖
+
+[![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2026-orange.svg)](https://hacktoberfest.com/)
+[![Built with Antigravity](https://img.shields.io/badge/Built_with-Google_Antigravity-teal.svg)](https://deepmind.google/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-19-cyan.svg)](https://react.dev/)
 
 ResQra is a complete, mobile-first full-stack web application designed to connect citizens, animal welfare organisations (NGOs), veterinary hospitals, and municipal responders through real-time AI triage, spatial mapping, community duplicate verification, area alert clustering, pet management, wildlife education, and crowdfunding.
+
+Originally conceived as an emergency response platform, ResQra is now actively prepared and maintained for **Hacktoberfest Open Source** collaboration.
+
+---
+
+## 🚀 Built with Google Antigravity
+
+This entire platform was architected, pair-programmed, and implemented using **Google Antigravity**—DeepMind's advanced agentic AI coding environment. Antigravity was leveraged to:
+- Formulate the **7-Tool ResQra Rescue Agent** architecture and deterministic medical safety guardrails.
+- Synthesize the 14-screen responsive UI layout matching the initial design reference with precision.
+- Implement the interactive **falling snowflakes & ambient particle background** engine.
+- Structure the comprehensive 22-table Supabase PostgreSQL database schema with spatial indexing and Row-Level Security (RLS).
+- Conduct autonomous end-to-end integration testing across all triage and donation pipelines.
 
 ---
 
@@ -14,7 +35,8 @@ ResQra has been engineered to match all 14 design screens in the reference speci
    - Original Paw + Heart SVG logo with brand gradient
    - Rescue hero photography
    - "A safer world for all animals"
-   - "Get Started ->" and "Explore Demo Mode"
+   - Hacktoberfest Open Source badge & Antigravity attribution
+   - "Get Started ->" and "Login"
 
 2. **Home Dashboard (`/home`)**:
    - Hero banner: *"They can't ask for help... But you can."* with instant "Report an Animal" CTA
@@ -91,19 +113,21 @@ ResQra has been engineered to match all 14 design screens in the reference speci
     - Role simulator: Citizen vs Verified Responder
     - Menu links: *My Reports, My Pets, Saved Articles, Donations, Help & Support, About Us, Logout*
     - Notification preferences and GPS privacy controls
+    - Functional Sign In / Logout session management
 
-13. **Theme Settings (Screen 13)**:
+13. **Theme Settings & Ambient Animation Engine (Screen 13)**:
     - **Light Theme**: Fresh white background with teal-500 and emerald-600 accents
     - **Dark Theme**: Midnight slate/teal background with neon emerald borders
     - **Liquid Glass Theme**: Translucent glass surfaces (`backdrop-blur-xl`, ambient mesh glow, specular highlights)
+    - **Snowflake & Particle Animation**: Dynamic, non-intrusive falling snowflakes and luminescent crystals rendered on an HTML5 canvas layer with interactive mouse displacement.
     - **Use System Theme** toggle switch
 
-14. **About Us — Founders (`/about`)**:
+14. **About Us (`/about`)**:
     - Tagline & ResQra mission statement
-    - Three Founders with BPIT institution:
+    - Core Team with BPIT institution:
       1. **Shivansh Patel** — BPIT (Founder & Developer)
-      2. **Shourya Sharma** — BPIT (Co-Founder & Developer)
-      3. **Soham** — BPIT (Co-Founder & Designer)
+      2. **Shourya Sharma** — BPIT (Concept & Ideation)
+    - Hacktoberfest open-source participation banner & Google Antigravity credits
     - Closing quote: *"Together for a kinder world."*
 
 ---
@@ -119,6 +143,30 @@ The backend includes a dedicated orchestration layer (`server/ai-agent.ts`) impl
 - **Tool E (`generate_action_plan`)**: Produces situational first-responder steps, warnings against human medication (e.g. Paracetamol toxicity), and rabies post-exposure prophylaxis advisories.
 - **Tool F (`create_case_summary`)**: Generates structured summaries and persists triage results to the database audit log.
 - **Tool G (`evaluate_area_risk`)**: Analyzes 24h rolling incident density against operational thresholds (e.g. 3+ bite incidents in 2.5km) to trigger municipal area alerts.
+
+---
+
+## 🎃 Hacktoberfest & Open Source Contributions
+
+ResQra welcomes open-source contributors! Here is how you can get involved:
+
+### Good First Issues
+- Add new species to the Wildlife Encyclopedia ([`server/db.ts`](server/db.ts)).
+- Enhance the Pet Owner Portal with medication reminders.
+- Add additional regional language support (Hindi, Bengali, Tamil, etc.).
+- Expand unit test coverage for the AI agent tools.
+
+### How to Contribute
+1. Fork the repository on GitHub.
+2. Clone your fork locally:
+   ```bash
+   git clone https://github.com/YOUR_USERNAME/resqra.git
+   ```
+3. Create a feature branch:
+   ```bash
+   git checkout -b feature/amazing-feature
+   ```
+4. Commit your changes and open a Pull Request with the `hacktoberfest-accepted` label.
 
 ---
 
@@ -159,40 +207,6 @@ Open [http://localhost:3001](http://localhost:3001).
 
 ---
 
-## ⚙️ Environment Configuration
-
-Create a `.env` file in the project root (see `.env.example`):
-
-```env
-PORT=3001
-
-# Optional: Supabase credentials
-SUPABASE_URL=https://your-project.supabase.co
-SUPABASE_ANON_KEY=your-anon-key
-
-# Optional: Google Gemini API key for real Vision verification
-GEMINI_API_KEY=your-gemini-key
-
-# Optional: OpenAI API key
-OPENAI_API_KEY=your-openai-key
-```
-
-> **Note:** If no external API keys are provided, ResQra automatically activates its built-in **Intelligent Demo Mode**. All 7 AI tools, photo uploads, database persistence, duplicate detection, and donation simulations work 100% reliably without requiring external keys.
-
----
-
-## 🗄️ Database & Supabase Setup
-
-The repository includes a production-ready PostgreSQL migration file in [supabase/schema.sql](supabase/schema.sql).
-
-To deploy to Supabase:
-1. Open your [Supabase Dashboard](https://supabase.com).
-2. Navigate to the **SQL Editor**.
-3. Paste the contents of `supabase/schema.sql` and run the script.
-4. All 22 tables (`profiles`, `animal_reports`, `ai_assessments`, `organisations`, `pets`, `wildlife_species`, `news_articles`, `fundraisers`, `donations`, etc.) will be created with Row Level Security enabled.
-
----
-
 ## 🧪 Automated Testing
 
 ResQra includes an automated test suite verifying all 7 AI tools and core rescue pipelines:
@@ -217,10 +231,11 @@ Expected output:
 
 ---
 
-## 👥 ResQra Founders
+## 👥 ResQra Team
 
 - **Shivansh Patel** — BPIT (Founder & Developer)
-- **Shourya Sharma** — BPIT (Co-Founder & Developer)
-- **Soham** — BPIT (Co-Founder & Designer)
+- **Shourya Sharma** — BPIT (Concept & Ideation)
+
+*Special thanks to the Google DeepMind team for **Google Antigravity**, which powered the development of this project.*
 
 *Together for a kinder world.*

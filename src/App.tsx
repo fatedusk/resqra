@@ -4,6 +4,7 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import { AuthProvider } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { BottomNav } from './components/BottomNav';
+import { ParticleBackground } from './components/ParticleBackground';
 
 // Pages
 import { WelcomePage } from './pages/WelcomePage';
@@ -27,13 +28,19 @@ const AppLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   return (
     <div
-      className={`min-h-screen flex flex-col font-sans transition-colors duration-200 ${
+      className={`min-h-screen flex flex-col font-sans transition-colors duration-200 relative overflow-x-hidden ${
         theme === 'liquid-glass' ? 'liquid-glass-bg text-white' : ''
       }`}
     >
-      {!isSplash && <Navbar />}
-      <main className="flex-1 w-full">{children}</main>
-      {!isSplash && <BottomNav />}
+      {/* Cool falling snowflake / particle background animation */}
+      <ParticleBackground />
+
+      {/* Main app layers with interactive z-index */}
+      <div className="relative z-10 flex flex-col min-h-screen">
+        {!isSplash && <Navbar />}
+        <main className="flex-1 w-full">{children}</main>
+        {!isSplash && <BottomNav />}
+      </div>
     </div>
   );
 };

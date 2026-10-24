@@ -541,7 +541,7 @@ const INITIAL_FUNDRAISERS: Fundraiser[] = [
     donations: [
       { id: 'don-1', donorName: 'Shivansh Patel', amount: 5000, paymentMethod: 'UPI (Demo)', date: '2026-10-15' },
       { id: 'don-2', donorName: 'Shourya Sharma', amount: 2500, paymentMethod: 'Card (Demo)', date: '2026-10-15' },
-      { id: 'don-3', donorName: 'Soham', amount: 3000, paymentMethod: 'UPI (Demo)', date: '2026-10-16' },
+      { id: 'don-3', donorName: 'Community Volunteer', amount: 3000, paymentMethod: 'UPI (Demo)', date: '2026-10-16' },
       { id: 'don-4', donorName: 'Kind Neighbor', amount: 14300, paymentMethod: 'NetBanking (Demo)', date: '2026-10-16' }
     ]
   },

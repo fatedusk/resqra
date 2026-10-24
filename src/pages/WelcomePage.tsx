@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Logo } from '../components/Logo';
-import { ArrowRight, Shield, Heart, Sparkles, Droplets } from 'lucide-react';
+import { ArrowRight, Sparkles } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
 export const WelcomePage: React.FC = () => {
@@ -13,7 +13,10 @@ export const WelcomePage: React.FC = () => {
       <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-96 h-96 bg-emerald-500/15 rounded-full blur-3xl pointer-events-none" />
 
       {/* Header Branding */}
-      <div className="pt-4 flex flex-col items-center">
+      <div className="pt-3 flex flex-col items-center">
+        <div className="mb-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-[11px] font-bold shadow-sm">
+          <span>🎃 Hacktoberfest Open Source • Built with Antigravity</span>
+        </div>
         <Logo size="lg" showTagline={true} />
       </div>
 
