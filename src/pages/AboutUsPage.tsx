@@ -23,8 +23,8 @@ export const AboutUsPage: React.FC = () => {
         <h2 className="text-2xl font-extrabold text-slate-900 dark:text-white">
           About ResQra
         </h2>
-        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-bold">
-          🎃 Open to Open Source Contribution
+        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-xs font-bold">
+          🌐 Open to Open Source Contribution
         </span>
       </div>
 
@@ -89,7 +89,7 @@ export const AboutUsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Powered by Google Antigravity & Hacktoberfest Open Source Card */}
+      {/* Powered by Google Antigravity & Open Source Card */}
       <div className="p-5 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-slate-800 shadow-md space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -113,8 +113,8 @@ export const AboutUsPage: React.FC = () => {
         </p>
 
         <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs">
-          <span className="text-amber-400 font-semibold flex items-center gap-1">
-            <GitPullRequest className="w-3.5 h-3.5" /> Open for Hacktoberfest Contributions
+          <span className="text-emerald-400 font-semibold flex items-center gap-1">
+            <GitPullRequest className="w-3.5 h-3.5" /> Open to Open Source Contribution
           </span>
           <span className="text-slate-400 text-[11px]">MIT License</span>
         </div>

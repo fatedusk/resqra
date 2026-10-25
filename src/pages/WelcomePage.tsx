@@ -14,8 +14,8 @@ export const WelcomePage: React.FC = () => {
 
       {/* Header Branding */}
       <div className="pt-3 flex flex-col items-center">
-        <div className="mb-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-[11px] font-bold shadow-sm">
-          <span>🎃 Hacktoberfest Open Source • Built with Antigravity</span>
+        <div className="mb-2.5 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-700 dark:text-emerald-300 text-[11px] font-bold shadow-sm">
+          <span>🌐 Open to Open Source Contribution • Built with Antigravity</span>
         </div>
         <Logo size="lg" showTagline={true} />
       </div>

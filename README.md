@@ -1,10 +1,10 @@
 # ResQra — AI-Powered Animal Rescue & Welfare Platform
 
 > **Tagline:** Every Life Deserves a Rescue.  
-> **Open Source:** Participated in **Hacktoberfest 2026** 🎃  
+> **Open Source:** Open to Open Source Contribution 🌐  
 > **Built with:** **Google Antigravity** (Advanced Agentic AI Assistant) 🤖
 
-[![Hacktoberfest](https://img.shields.io/badge/Hacktoberfest-2026-orange.svg)](https://hacktoberfest.com/)
+[![Open Source](https://img.shields.io/badge/Open_Source-Contributions_Welcome-emerald.svg)](https://github.com/fatedusk/resqra)
 [![Built with Antigravity](https://img.shields.io/badge/Built_with-Google_Antigravity-teal.svg)](https://deepmind.google/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-emerald.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue.svg)](https://www.typescriptlang.org/)
@@ -12,7 +12,7 @@
 
 ResQra is a complete, mobile-first full-stack web application designed to connect citizens, animal welfare organisations (NGOs), veterinary hospitals, and municipal responders through real-time AI triage, spatial mapping, community duplicate verification, area alert clustering, pet management, wildlife education, and crowdfunding.
 
-Originally conceived as an emergency response platform, ResQra is now actively prepared and maintained for **Hacktoberfest Open Source** collaboration.
+Originally conceived as an emergency response platform, ResQra is now actively maintained and is **Open to Open Source Contribution**.
 
 ---
 
@@ -35,7 +35,7 @@ ResQra has been engineered to match all 14 design screens in the reference speci
    - Original Paw + Heart SVG logo with brand gradient
    - Rescue hero photography
    - "A safer world for all animals"
-   - Hacktoberfest Open Source badge & Antigravity attribution
+   - Open to Open Source Contribution badge & Antigravity attribution
    - "Get Started ->" and "Login"
 
 2. **Home Dashboard (`/home`)**:
@@ -126,7 +126,7 @@ ResQra has been engineered to match all 14 design screens in the reference speci
     - Tagline & ResQra mission statement
     - Founder with BPIT institution:
       - **Shivansh Patel** — BPIT (Founder & Lead Developer)
-    - Hacktoberfest open-source participation banner & Google Antigravity credits
+    - Open to Open Source Contribution banner & Google Antigravity credits
     - Closing quote: *"Together for a kinder world."*
 
 ---
@@ -145,7 +145,7 @@ The backend includes a dedicated orchestration layer (`server/ai-agent.ts`) impl
 
 ---
 
-## 🎃 Hacktoberfest & Open Source Contributions
+## 🌐 Open to Open Source Contribution
 
 ResQra welcomes open-source contributors! Here is how you can get involved:
 
@@ -165,7 +165,7 @@ ResQra welcomes open-source contributors! Here is how you can get involved:
    ```bash
    git checkout -b feature/amazing-feature
    ```
-4. Commit your changes and open a Pull Request with the `hacktoberfest-accepted` label.
+4. Commit your changes and open a Pull Request.
 
 ---
 
@@ -203,6 +203,28 @@ npm run build
 npm start
 ```
 Open [http://localhost:3001](http://localhost:3001).
+
+---
+
+## ☁️ Free Cloud Deployment (Render.com)
+
+You can deploy ResQra for free in less than 5 minutes on **Render**:
+
+1. **Push your code to GitHub**:
+   ```bash
+   git push -u origin main
+   ```
+2. **Create a Free Account** on [Render.com](https://render.com).
+3. Click **New +** -> **Web Service**.
+4. Connect your GitHub repository (`fatedusk/resqra`).
+5. Configure the service settings:
+   - **Name**: `resqra`
+   - **Environment**: `Node`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+   - **Instance Type**: `Free`
+6. Click **Deploy Web Service**.
+7. Once the build finishes, Render will provide a free live URL (e.g. `https://resqra.onrender.com`). Both the frontend UI and the backend API will run seamlessly from the same host!
 
 ---
 
