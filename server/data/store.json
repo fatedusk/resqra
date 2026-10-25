@@ -1,6 +1,58 @@
 {
   "reports": [
     {
+      "id": "rep-1792932220192",
+      "caseNumber": "Case AM-2026-0021",
+      "animalType": "Dog",
+      "condition": "Seems ill",
+      "urgency": "Critical",
+      "status": "Resolved",
+      "inImmediateDanger": true,
+      "description": "Animal observed requiring assistance.\n[Update 25/10/2026]: suffering from some illness\n[Update 25/10/2026]: suffering from some illness",
+      "observedSymptoms": "",
+      "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+      "locationName": "Noida Location (28.57258, 77.31594)",
+      "latitude": 28.57258,
+      "longitude": 77.31594,
+      "reporterName": "Shivansh Patel",
+      "reporterPhone": "",
+      "createdAt": "2026-10-25T12:43:40.192Z",
+      "updatedAt": "2026-10-25T12:44:52.806Z",
+      "duplicateCandidate": {
+        "candidateId": "rep-1792267089388",
+        "distanceKm": 0.6,
+        "description": "Reported within 0.6 km and 184.8h difference with matching type (Dog).",
+        "imageUrl": "https://images.unsplash.com/photo-1543466835-00a7907e9de1?auto=format&fit=crop&w=800&q=80",
+        "status": "pending"
+      },
+      "aiAssessment": {
+        "id": "ai-1792932220193",
+        "reportId": "rep-1792932220192",
+        "animalDetected": true,
+        "detectedSpecies": "Dog (Dog)",
+        "confidence": 0.94,
+        "imageQuality": "good",
+        "urgencyLevel": "Critical",
+        "urgencyReasoning": "Immediate life-threat detected due to acute physical trauma, respiratory distress, or severe hemorrhage. Visual analysis verifies presence of animal.",
+        "observedEvidence": [
+          "Critical indicators present in clinical notes or reporter flags.",
+          "Animal reported to be in active danger zone (traffic/predator risk)."
+        ],
+        "recommendedSteps": [
+          "Contact the nearest emergency veterinary hospital or NGO animal ambulance right away.",
+          "Keep the animal in a safe, quiet, sheltered spot away from traffic and curious crowds.",
+          "Avoid giving solid food or water if the animal is severely injured or choking.",
+          "Inform the nearest local NGO with the exact Case ID and live coordinates."
+        ],
+        "safetyWarnings": [
+          "Never administer human medications (such as Paracetamol/Ibuprofen); they are fatal to animals.",
+          "An injured or frightened animal may bite defensively; maintain a secure distance."
+        ],
+        "isDemo": true,
+        "createdAt": "2026-10-25T12:43:40.193Z"
+      }
+    },
+    {
       "id": "rep-1792438345427",
       "caseNumber": "Case AM-2026-0020",
       "animalType": "Dog",
@@ -445,6 +497,12 @@
           "name": "Bordetella (Kennel Cough)",
           "dueDate": "2026-11-20",
           "status": "Upcoming"
+        },
+        {
+          "id": "vac-1792932345040",
+          "name": "Bordetella (Kennel Cough)",
+          "dueDate": "2026-11-20",
+          "status": "Upcoming"
         }
       ],
       "healthRecords": [
@@ -698,6 +756,15 @@
   ],
   "incidents": [
     {
+      "id": "inc-1792932220194",
+      "incidentType": "Injured Animal",
+      "locationName": "Noida Location (28.57258, 77.31594)",
+      "latitude": 28.57258,
+      "longitude": 77.31594,
+      "timeAgo": "Just now",
+      "createdAt": "2026-10-25T12:43:40.194Z"
+    },
+    {
       "id": "inc-1792438345431",
       "incidentType": "Injured Animal",
       "locationName": "Noida Location (28.57001, 77.33139)",
@@ -779,6 +846,12 @@
       "candidateId": "rep-dup-01",
       "vote": "different_case",
       "timestamp": "2026-10-19T19:41:34.108Z"
+    },
+    {
+      "reportId": "rep-1792932220192",
+      "candidateId": "rep-1792267089388",
+      "vote": "same_case",
+      "timestamp": "2026-10-25T12:44:18.039Z"
     }
   ]
 }
