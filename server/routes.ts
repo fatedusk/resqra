@@ -241,11 +241,22 @@ router.patch('/reports/:id/status', (req: Request, res: Response) => {
   });
 });
 
-// DELETE REPORT
+// DELETE REPORT (Protected: Creator or Founder Shivansh Patel only)
 router.delete('/reports/:id', (req: Request, res: Response) => {
   const index = db.reports.findIndex((r) => r.id === req.params.id || r.caseNumber === req.params.id);
   if (index === -1) {
     return res.status(404).json({ error: 'Report not found' });
+  }
+
+  const report = db.reports[index];
+  const userName = (req.headers['x-user-name'] as string) || req.body?.userName;
+  const isFounder = !userName || userName.toLowerCase().includes('shivansh');
+  const isCreator = report.reporterName && userName && report.reporterName.toLowerCase() === userName.toLowerCase();
+
+  if (!isFounder && !isCreator) {
+    return res.status(403).json({
+      error: 'Permission denied: Only the report creator or the founder (Shivansh Patel) can delete this report.'
+    });
   }
 
   const [removed] = db.reports.splice(index, 1);

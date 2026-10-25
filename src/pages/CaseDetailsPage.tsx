@@ -12,6 +12,7 @@ import {
 } from 'lucide-react';
 import { api } from '../services/api';
 import { AnimalReport } from '../types';
+import { useAuth } from '../context/AuthContext';
 import { UrgencyBadge } from '../components/UrgencyBadge';
 import { DuplicateVoteCard } from '../components/DuplicateVoteCard';
 import { UpdateStatusModal } from '../components/UpdateStatusModal';
@@ -19,6 +20,7 @@ import { UpdateStatusModal } from '../components/UpdateStatusModal';
 export const CaseDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { user } = useAuth();
 
   const [report, setReport] = useState<AnimalReport | null>(null);
   const [loading, setLoading] = useState(true);
@@ -55,16 +57,34 @@ export const CaseDetailsPage: React.FC = () => {
     );
   };
 
+  // Only the user who filed the report or the Founder (Shivansh Patel) can delete it
+  const isFounder = Boolean(
+    user && (
+      user.fullName.toLowerCase().includes('shivansh') ||
+      user.email.toLowerCase().includes('shivansh') ||
+      user.role === 'admin'
+    )
+  );
+
+  const isCreator = Boolean(
+    user && report && (
+      (report.reporterId && user.id === report.reporterId) ||
+      (report.reporterName && user.fullName.toLowerCase() === report.reporterName.toLowerCase())
+    )
+  );
+
+  const canDelete = isFounder || isCreator;
+
   const handleDeleteReport = async () => {
     if (!report) return;
     const confirmed = window.confirm(
-      `Are you sure you want to permanently remove ${report.caseNumber} (${report.animalType})?\n\nThis will remove the report from the active feed and map.`
+      `Are you sure you want to permanently remove ${report.caseNumber} (${report.animalType})?\n\nThis action is authorized for the report creator and founder.`
     );
     if (!confirmed) return;
 
     try {
       setIsDeleting(true);
-      await api.deleteReport(report.id);
+      await api.deleteReport(report.id, user?.fullName);
       navigate('/home');
     } catch (err: any) {
       alert(err.message || 'Failed to remove report');
@@ -150,6 +170,10 @@ export const CaseDetailsPage: React.FC = () => {
             <span>Coordinates:</span>
             <span className="font-mono">{report.latitude}, {report.longitude}</span>
           </div>
+          <div className="flex items-center gap-1.5 text-slate-500 dark:text-slate-400 pt-0.5">
+            <span>Reported by:</span>
+            <span className="font-semibold text-slate-800 dark:text-slate-200">{report.reporterName || 'Community Member'}</span>
+          </div>
         </div>
 
         <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 whitespace-pre-line">
@@ -213,15 +237,18 @@ export const CaseDetailsPage: React.FC = () => {
           <span>Update Status & Observations</span>
         </button>
 
-        <button
-          onClick={handleDeleteReport}
-          disabled={isDeleting}
-          title="Remove Report Permanently"
-          className="px-4 py-3.5 rounded-2xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/60 font-bold transition flex items-center justify-center gap-1.5 disabled:opacity-50"
-        >
-          <Trash2 className="w-4 h-4" />
-          <span className="text-xs hidden sm:inline">{isDeleting ? 'Removing...' : 'Delete'}</span>
-        </button>
+        {/* Delete Report is only rendered if authorized (Creator or Founder Shivansh) */}
+        {canDelete && (
+          <button
+            onClick={handleDeleteReport}
+            disabled={isDeleting}
+            title={isFounder ? "Founder Access: Remove Report" : "Creator Access: Remove Report"}
+            className="px-4 py-3.5 rounded-2xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/60 font-bold transition flex items-center justify-center gap-1.5 disabled:opacity-50"
+          >
+            <Trash2 className="w-4 h-4" />
+            <span className="text-xs hidden sm:inline">{isDeleting ? 'Removing...' : 'Delete'}</span>
+          </button>
+        )}
       </div>
 
       {/* Update Status Modal */}

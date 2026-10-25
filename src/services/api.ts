@@ -95,11 +95,18 @@ export const api = {
     return res.json();
   },
 
-  async deleteReport(id: string) {
+  async deleteReport(id: string, userName?: string) {
     const res = await fetch(`${API_BASE}/reports/${id}`, {
-      method: 'DELETE'
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(userName ? { 'x-user-name': userName } : {})
+      }
     });
-    if (!res.ok) throw new Error('Failed to delete report');
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error || 'Failed to delete report');
+    }
     return res.json() as Promise<{ success: boolean; message: string }>;
   },
 
