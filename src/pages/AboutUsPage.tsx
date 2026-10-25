@@ -24,7 +24,7 @@ export const AboutUsPage: React.FC = () => {
           About ResQra
         </h2>
         <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/30 text-amber-700 dark:text-amber-300 text-xs font-bold">
-          🎃 Hacktoberfest Open Source Participation
+          🎃 Open to Open Source Contribution
         </span>
       </div>
 

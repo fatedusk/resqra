@@ -124,9 +124,8 @@ ResQra has been engineered to match all 14 design screens in the reference speci
 
 14. **About Us (`/about`)**:
     - Tagline & ResQra mission statement
-    - Core Team with BPIT institution:
-      1. **Shivansh Patel** — BPIT (Founder & Developer)
-      2. **Shourya Sharma** — BPIT (Concept & Ideation)
+    - Founder with BPIT institution:
+      - **Shivansh Patel** — BPIT (Founder & Lead Developer)
     - Hacktoberfest open-source participation banner & Google Antigravity credits
     - Closing quote: *"Together for a kinder world."*
 
