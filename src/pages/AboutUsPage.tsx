@@ -89,7 +89,7 @@ export const AboutUsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Powered by Google Antigravity & Open Source Card */}
+      {/* Open Source Platform Architecture Card */}
       <div className="p-5 rounded-3xl bg-gradient-to-br from-slate-900 to-slate-950 text-white border border-slate-800 shadow-md space-y-3">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
@@ -98,9 +98,9 @@ export const AboutUsPage: React.FC = () => {
             </span>
             <div>
               <h4 className="text-sm font-bold text-white flex items-center gap-1.5">
-                Built with Google Antigravity
+                Autonomous Rescue Orchestration
               </h4>
-              <p className="text-[11px] text-slate-400">Advanced Agentic AI Assistant</p>
+              <p className="text-[11px] text-slate-400">Multi-Tool Agentic Safety Architecture</p>
             </div>
           </div>
           <span className="text-[10px] font-bold px-2.5 py-1 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
@@ -109,7 +109,7 @@ export const AboutUsPage: React.FC = () => {
         </div>
 
         <p className="text-xs text-slate-300 leading-relaxed">
-          ResQra was designed, architected, and pair-programmed using <strong>Google Antigravity</strong>. Antigravity helped formulate the 7-tool rescue agent, deterministic medical safety guardrails, spatial clustering algorithms, and the multi-theme design system.
+          ResQra operates on a 7-tool rescue triage agent, deterministic medical safety guardrails, spatial clustering algorithms, and a multi-theme design system engineered for emergency response speed.
         </p>
 
         <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between text-xs">
