@@ -95,6 +95,14 @@ export const api = {
     return res.json();
   },
 
+  async deleteReport(id: string) {
+    const res = await fetch(`${API_BASE}/reports/${id}`, {
+      method: 'DELETE'
+    });
+    if (!res.ok) throw new Error('Failed to delete report');
+    return res.json() as Promise<{ success: boolean; message: string }>;
+  },
+
   async analyzeReport(id: string) {
     const res = await fetch(`${API_BASE}/reports/${id}/analyse`, {
       method: 'POST'

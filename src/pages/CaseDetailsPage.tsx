@@ -7,7 +7,8 @@ import {
   CheckSquare,
   Square,
   Sparkles,
-  Edit3
+  Edit3,
+  Trash2
 } from 'lucide-react';
 import { api } from '../services/api';
 import { AnimalReport } from '../types';
@@ -23,6 +24,7 @@ export const CaseDetailsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
   const [completedActions, setCompletedActions] = useState<number[]>([0]); // First item completed by default
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
     let isMounted = true;
@@ -51,6 +53,23 @@ export const CaseDetailsPage: React.FC = () => {
     setCompletedActions((prev) =>
       prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
+  };
+
+  const handleDeleteReport = async () => {
+    if (!report) return;
+    const confirmed = window.confirm(
+      `Are you sure you want to permanently remove ${report.caseNumber} (${report.animalType})?\n\nThis will remove the report from the active feed and map.`
+    );
+    if (!confirmed) return;
+
+    try {
+      setIsDeleting(true);
+      await api.deleteReport(report.id);
+      navigate('/home');
+    } catch (err: any) {
+      alert(err.message || 'Failed to remove report');
+      setIsDeleting(false);
+    }
   };
 
   if (loading) {
@@ -115,7 +134,7 @@ export const CaseDetailsPage: React.FC = () => {
             {report.animalType} ({report.condition.split('/')[0].trim()})
           </h3>
           <span className="text-xs text-slate-400 flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5" /> Updated 2h ago
+            <Clock className="w-3.5 h-3.5" /> Updated recently
           </span>
         </div>
 
@@ -133,8 +152,8 @@ export const CaseDetailsPage: React.FC = () => {
           </div>
         </div>
 
-        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
-          <span className="font-bold text-slate-900 dark:text-white block mb-1">Observed Findings</span>
+        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300 whitespace-pre-line">
+          <span className="font-bold text-slate-900 dark:text-white block mb-1">Observed Findings & History</span>
           <p className="leading-relaxed">{report.description}</p>
         </div>
       </div>
@@ -184,14 +203,24 @@ export const CaseDetailsPage: React.FC = () => {
         />
       )}
 
-      {/* Update Status Button (Screen 6) */}
-      <div className="pt-2">
+      {/* Responder Actions: Update Status & Delete Report */}
+      <div className="pt-2 flex items-center gap-2.5">
         <button
           onClick={() => setIsUpdateModalOpen(true)}
-          className="w-full py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
+          className="flex-1 py-3.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-md transition flex items-center justify-center gap-2"
         >
           <Edit3 className="w-4 h-4" />
           <span>Update Status & Observations</span>
+        </button>
+
+        <button
+          onClick={handleDeleteReport}
+          disabled={isDeleting}
+          title="Remove Report Permanently"
+          className="px-4 py-3.5 rounded-2xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/40 text-rose-600 dark:text-rose-400 hover:bg-rose-100 dark:hover:bg-rose-900/60 font-bold transition flex items-center justify-center gap-1.5 disabled:opacity-50"
+        >
+          <Trash2 className="w-4 h-4" />
+          <span className="text-xs hidden sm:inline">{isDeleting ? 'Removing...' : 'Delete'}</span>
         </button>
       </div>
 

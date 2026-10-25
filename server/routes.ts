@@ -241,6 +241,24 @@ router.patch('/reports/:id/status', (req: Request, res: Response) => {
   });
 });
 
+// DELETE REPORT
+router.delete('/reports/:id', (req: Request, res: Response) => {
+  const index = db.reports.findIndex((r) => r.id === req.params.id || r.caseNumber === req.params.id);
+  if (index === -1) {
+    return res.status(404).json({ error: 'Report not found' });
+  }
+
+  const [removed] = db.reports.splice(index, 1);
+  db.incidents = db.incidents.filter((inc) => !inc.id.includes(removed.id) && inc.locationName !== removed.locationName);
+  db.duplicateVotes = db.duplicateVotes.filter((v) => v.reportId !== removed.id && v.candidateId !== removed.id);
+  db.save();
+
+  res.json({
+    success: true,
+    message: `Report ${removed.caseNumber} removed successfully.`
+  });
+});
+
 // RUN AI ANALYSIS
 router.post('/reports/:id/analyse', async (req: Request, res: Response) => {
   const report = db.reports.find((r) => r.id === req.params.id || r.caseNumber === req.params.id);
