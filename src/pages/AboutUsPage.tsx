@@ -1,22 +1,15 @@
 import React from 'react';
 import { Logo } from '../components/Logo';
-import { Heart, ShieldCheck, Sparkles, GraduationCap, Users, GitPullRequest, Code, Terminal } from 'lucide-react';
+import { Heart, ShieldCheck, Sparkles, GraduationCap, User, GitPullRequest, Terminal } from 'lucide-react';
 
 export const AboutUsPage: React.FC = () => {
   const founders = [
     {
       name: 'Shivansh Patel',
-      role: 'Founder & Developer',
+      role: 'Founder & Lead Developer',
       institution: 'BPIT',
       initials: 'SP',
       bio: 'Architected full-stack ResQra orchestration, database schemas, and AI agent rescue pipelines.'
-    },
-    {
-      name: 'Shourya Sharma',
-      role: 'Concept & Ideation',
-      institution: 'BPIT',
-      initials: 'SS',
-      bio: 'Formulated the community animal welfare framework, triage heuristics, and incident alert workflows.'
     }
   ];
 
@@ -53,31 +46,31 @@ export const AboutUsPage: React.FC = () => {
         </div>
       </div>
 
-      {/* Founders Section (Shivansh Patel & Shourya Sharma — BPIT) */}
+      {/* Founder Section (Shivansh Patel — BPIT) */}
       <div className="space-y-3">
         <div className="flex items-center justify-between">
           <h3 className="text-sm font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-2">
-            <Users className="w-4 h-4 text-emerald-500" />
-            Core Team
+            <User className="w-4 h-4 text-emerald-500" />
+            Founder & Developer
           </h3>
           <span className="text-xs text-slate-400 flex items-center gap-1 font-semibold">
             <GraduationCap className="w-3.5 h-3.5 text-emerald-500" /> BPIT
           </span>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="max-w-md mx-auto w-full">
           {founders.map((f) => (
             <div
               key={f.name}
-              className="p-5 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col items-center text-center space-y-3 hover:border-emerald-500 transition group"
+              className="p-6 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col items-center text-center space-y-3 hover:border-emerald-500 transition group"
             >
               {/* Neutral avatar illustration with initials */}
-              <div className="w-16 h-16 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white font-black text-xl flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
+              <div className="w-18 h-18 rounded-2xl bg-gradient-to-tr from-emerald-600 to-teal-400 text-white font-black text-2xl flex items-center justify-center shadow-md shadow-emerald-500/20 group-hover:scale-105 transition-transform">
                 {f.initials}
               </div>
 
               <div>
-                <h4 className="font-bold text-base text-slate-900 dark:text-white">
+                <h4 className="font-bold text-lg text-slate-900 dark:text-white">
                   {f.name}
                 </h4>
                 <p className="text-xs text-emerald-600 dark:text-emerald-400 font-bold mt-0.5">
@@ -87,7 +80,7 @@ export const AboutUsPage: React.FC = () => {
                   <GraduationCap className="w-3 h-3 text-slate-400" />
                   <span>{f.institution}</span>
                 </div>
-                <p className="text-xs text-slate-500 dark:text-slate-400 mt-2.5 leading-relaxed">
+                <p className="text-xs text-slate-500 dark:text-slate-400 mt-3 leading-relaxed">
                   {f.bio}
                 </p>
               </div>

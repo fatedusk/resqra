@@ -13,7 +13,7 @@ const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [theme, setThemeState] = useState<AppTheme>(() => {
     const saved = localStorage.getItem('resqra_theme') as AppTheme;
-    return saved || 'light';
+    return saved || 'dark';
   });
 
   const [useSystemTheme, setUseSystemThemeState] = useState<boolean>(() => {

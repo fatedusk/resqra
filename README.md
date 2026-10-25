@@ -233,8 +233,7 @@ Expected output:
 
 ## 👥 ResQra Team
 
-- **Shivansh Patel** — BPIT (Founder & Developer)
-- **Shourya Sharma** — BPIT (Concept & Ideation)
+- **Shivansh Patel** — BPIT (Founder & Lead Developer)
 
 *Special thanks to the Google DeepMind team for **Google Antigravity**, which powered the development of this project.*
 
