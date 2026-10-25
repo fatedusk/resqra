@@ -51,4 +51,21 @@ app.use((err: any, _req: express.Request, res: express.Response, _next: express.
 app.listen(PORT, () => {
   console.log(`🐾 ResQra AI Server running on http://localhost:${PORT}`);
   console.log(`📡 API available at http://localhost:${PORT}/api/health`);
+
+  // Auto Keep-Alive Heartbeat for Free Cloud Hosting (e.g. Render / Koyeb)
+  const externalUrl = process.env.RENDER_EXTERNAL_URL || process.env.KEEP_ALIVE_URL;
+  if (externalUrl) {
+    const PING_INTERVAL = 13 * 60 * 1000; // Ping every 13 mins (Render sleeps after 15 mins)
+    console.log(`⏱️ Keep-alive heartbeat enabled for ${externalUrl}`);
+    setInterval(async () => {
+      try {
+        const res = await fetch(`${externalUrl}/api/health`);
+        if (res.ok) {
+          console.log(`[Keep-Alive] Heartbeat pinged ${externalUrl}/api/health at ${new Date().toISOString()}`);
+        }
+      } catch (err: any) {
+        console.warn('[Keep-Alive] Heartbeat warning:', err.message);
+      }
+    }, PING_INTERVAL);
+  }
 });
