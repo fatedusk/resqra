@@ -228,6 +228,9 @@ router.patch('/reports/:id/status', (req: Request, res: Response) => {
   }
 
   report.status = status;
+  if (notes && typeof notes === 'string' && notes.trim()) {
+    report.description = report.description + String.fromCharCode(10) + '[Update ' + new Date().toLocaleDateString() + ']: ' + notes.trim();
+  }
   report.updatedAt = new Date().toISOString();
   db.save();
 

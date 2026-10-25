@@ -13,8 +13,7 @@ import {
   Bird,
   Trees,
   HelpCircle,
-  Sparkles,
-  Info
+  Sparkles
 } from 'lucide-react';
 import { api } from '../services/api';
 import { MapComponent } from '../components/MapComponent';

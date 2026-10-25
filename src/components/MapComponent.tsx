@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, Circle, useMapEvents } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Circle, useMap, useMapEvents } from 'react-leaflet';
 import L from 'leaflet';
 import { AnimalReport, Organisation, AreaAlert } from '../types';
 import { Link } from 'react-router-dom';
-import { Phone, Navigation, Shield, HeartHandshake } from 'lucide-react';
+import { Phone, Navigation } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 // Fix Leaflet default icon paths in bundlers
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -28,7 +29,7 @@ const createCustomIcon = (bgColor: string, iconSvg: string) => {
         justify-content: center;
         color: white;
         border: 2.5px solid white;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.35);
       ">
         ${iconSvg}
       </div>
@@ -59,7 +60,7 @@ const userPinIcon = createCustomIcon(
   `<svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="8"/></svg>`
 );
 
-// Map click handler helper for picker
+// Map click handler helper for location picker
 const LocationPickerEvents: React.FC<{ onPick?: (lat: number, lng: number) => void }> = ({ onPick }) => {
   useMapEvents({
     click(e) {
@@ -68,6 +69,36 @@ const LocationPickerEvents: React.FC<{ onPick?: (lat: number, lng: number) => vo
       }
     }
   });
+  return null;
+};
+
+// Map controller to ensure reliable rendering and dynamic pan/zoom
+const MapController: React.FC<{ center: [number, number]; zoom: number }> = ({ center, zoom }) => {
+  const map = useMap();
+  const [lat, lng] = center;
+
+  useEffect(() => {
+    // Invalidate map size so layout transitions and flex dimensions do not break tiles
+    map.invalidateSize();
+    const t1 = setTimeout(() => map.invalidateSize(), 100);
+    const t2 = setTimeout(() => map.invalidateSize(), 300);
+
+    const onResize = () => map.invalidateSize();
+    window.addEventListener('resize', onResize);
+
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+      window.removeEventListener('resize', onResize);
+    };
+  }, [map]);
+
+  useEffect(() => {
+    if (lat && lng) {
+      map.setView([lat, lng], zoom, { animate: true });
+    }
+  }, [lat, lng, zoom, map]);
+
   return null;
 };
 
@@ -96,6 +127,14 @@ export const MapComponent: React.FC<MapComponentProps> = ({
   height = '420px',
   className = ''
 }) => {
+  const { theme } = useTheme();
+  const isDark = theme === 'dark' || theme === 'liquid-glass';
+
+  // High-reliability CartoDB basemap tiles (prevents OpenStreetMap 403 / 429 block error)
+  const tileUrl = isDark
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+    : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+
   return (
     <div style={{ height }} className={`w-full relative overflow-hidden rounded-2xl shadow-inner ${className}`}>
       <MapContainer
@@ -104,9 +143,13 @@ export const MapComponent: React.FC<MapComponentProps> = ({
         scrollWheelZoom={false}
         className="w-full h-full"
       >
+        <MapController center={center} zoom={zoom} />
+
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noreferrer">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions" target="_blank" rel="noreferrer">CARTO</a>'
+          url={tileUrl}
+          subdomains="abcd"
+          maxZoom={19}
         />
 
         {/* Location Picker Click Listener */}
@@ -117,8 +160,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           <Marker position={selectedMarkerLocation} icon={userPinIcon}>
             <Popup>
               <div className="text-xs p-1 font-sans">
-                <span className="font-bold text-emerald-700 block">Reported Location Pin</span>
-                <span>{selectedMarkerLocation[0]}, {selectedMarkerLocation[1]}</span>
+                <span className="font-bold text-emerald-700 dark:text-emerald-400 block">Reported Location Pin</span>
+                <span className="text-slate-600 dark:text-slate-300">{selectedMarkerLocation[0]}, {selectedMarkerLocation[1]}</span>
               </div>
             </Popup>
           </Marker>
@@ -129,8 +172,8 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           <Marker position={userLocation} icon={userPinIcon}>
             <Popup>
               <div className="text-xs p-1 font-sans">
-                <span className="font-bold text-slate-800 block">You Are Here</span>
-                <span className="text-slate-500">Sector 12, Noida</span>
+                <span className="font-bold text-slate-900 dark:text-white block">You Are Here</span>
+                <span className="text-slate-500 dark:text-slate-400">Sector 12, Noida</span>
               </div>
             </Popup>
           </Marker>
@@ -146,7 +189,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
             <Popup>
               <div className="p-1 font-sans max-w-[210px]">
                 <div className="flex items-center justify-between gap-1 mb-1">
-                  <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded">
+                  <span className="text-[10px] font-bold text-rose-600 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300 px-1.5 py-0.5 rounded">
                     {rep.urgency} Urgency
                   </span>
                   <span className="text-[10px] text-slate-400 font-mono">{rep.caseNumber}</span>
@@ -156,10 +199,10 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                   alt={rep.animalType}
                   className="w-full h-24 object-cover rounded-lg my-1.5"
                 />
-                <h4 className="font-semibold text-xs text-slate-900 leading-snug">
+                <h4 className="font-semibold text-xs text-slate-900 dark:text-white leading-snug">
                   {rep.animalType} • {rep.condition}
                 </h4>
-                <p className="text-[11px] text-slate-500 mt-0.5 line-clamp-2">
+                <p className="text-[11px] text-slate-500 dark:text-slate-400 mt-0.5 line-clamp-2">
                   {rep.locationName}
                 </p>
                 <Link
@@ -187,27 +230,29 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                   <div className="flex items-center gap-1.5 mb-1">
                     <span
                       className={`text-[10px] font-bold px-1.5 py-0.5 rounded ${
-                        isHospital ? 'bg-blue-100 text-blue-700' : 'bg-teal-100 text-teal-800'
+                        isHospital
+                          ? 'bg-blue-100 text-blue-700 dark:bg-blue-950/60 dark:text-blue-300'
+                          : 'bg-teal-100 text-teal-800 dark:bg-teal-950/60 dark:text-teal-300'
                       }`}
                     >
                       {isHospital ? 'Veterinary Hospital' : 'Animal Welfare NGO'}
                     </span>
                     {org.isVerified && (
-                      <span className="text-[10px] text-emerald-600 font-semibold flex items-center">
+                      <span className="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold flex items-center">
                         ✓ Verified
                       </span>
                     )}
                   </div>
-                  <h4 className="font-bold text-sm text-slate-900 leading-tight">{org.name}</h4>
-                  <p className="text-xs text-slate-500 mt-1">{org.address}</p>
-                  <p className="text-[11px] text-emerald-600 font-medium mt-0.5">
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white leading-tight">{org.name}</h4>
+                  <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">{org.address}</p>
+                  <p className="text-[11px] text-emerald-600 dark:text-emerald-400 font-medium mt-0.5">
                     {org.distanceKm ? `~${org.distanceKm} km away` : 'Nearby'} • {org.openHours}
                   </p>
 
                   <div className="mt-2.5 flex items-center gap-1.5">
                     <a
                       href={`tel:${org.phone}`}
-                      className="flex-1 py-1 px-2 text-center bg-emerald-600 text-white rounded text-xs font-medium flex items-center justify-center gap-1"
+                      className="flex-1 py-1 px-2 text-center bg-emerald-600 hover:bg-emerald-700 text-white rounded text-xs font-medium flex items-center justify-center gap-1 transition"
                     >
                       <Phone className="w-3 h-3" /> Call
                     </a>
@@ -215,7 +260,7 @@ export const MapComponent: React.FC<MapComponentProps> = ({
                       href={`https://www.google.com/maps/dir/?api=1&destination=${org.latitude},${org.longitude}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="flex-1 py-1 px-2 text-center border border-slate-300 text-slate-700 rounded text-xs font-medium flex items-center justify-center gap-1"
+                      className="flex-1 py-1 px-2 text-center border border-slate-300 dark:border-slate-700 hover:border-slate-400 text-slate-700 dark:text-slate-200 rounded text-xs font-medium flex items-center justify-center gap-1 transition"
                     >
                       <Navigation className="w-3 h-3" /> Route
                     </a>
@@ -242,11 +287,11 @@ export const MapComponent: React.FC<MapComponentProps> = ({
           >
             <Popup>
               <div className="p-1 font-sans">
-                <span className="text-[10px] font-bold text-rose-600 bg-rose-50 px-1 rounded">
+                <span className="text-[10px] font-bold text-rose-600 bg-rose-50 dark:bg-rose-950/60 dark:text-rose-300 px-1 rounded">
                   {alt.severity}
                 </span>
-                <p className="text-xs font-semibold mt-1">{alt.title}</p>
-                <p className="text-[11px] text-slate-600 mt-0.5">{alt.details}</p>
+                <p className="text-xs font-semibold mt-1 text-slate-900 dark:text-white">{alt.title}</p>
+                <p className="text-[11px] text-slate-600 dark:text-slate-300 mt-0.5">{alt.details}</p>
               </div>
             </Popup>
           </Circle>

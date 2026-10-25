@@ -4,11 +4,8 @@ import {
   AlertTriangle,
   Sparkles,
   Phone,
-  MapPin,
   ArrowRight,
-  ShieldCheck,
   CheckCircle2,
-  Clock,
   Compass,
   ArrowLeft
 } from 'lucide-react';

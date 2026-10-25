@@ -6,13 +6,8 @@ import {
   Clock,
   CheckSquare,
   Square,
-  Shield,
   Sparkles,
-  ExternalLink,
-  Phone,
-  Edit3,
-  CheckCircle2,
-  AlertCircle
+  Edit3
 } from 'lucide-react';
 import { api } from '../services/api';
 import { AnimalReport } from '../types';
@@ -29,19 +24,27 @@ export const CaseDetailsPage: React.FC = () => {
   const [completedActions, setCompletedActions] = useState<number[]>([0]); // First item completed by default
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
 
-  const fetchReport = async () => {
-    try {
-      const data = await api.getReportById(id || 'rep-001');
-      setReport(data.report);
-    } catch (err) {
-      console.warn('Error fetching report:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    let isMounted = true;
+    const fetchReport = async () => {
+      try {
+        const data = await api.getReportById(id || 'rep-001');
+        if (isMounted) {
+          setReport(data.report);
+        }
+      } catch (err) {
+        console.warn('Error fetching report:', err);
+      } finally {
+        if (isMounted) {
+          setLoading(false);
+        }
+      }
+    };
+
     fetchReport();
+    return () => {
+      isMounted = false;
+    };
   }, [id]);
 
   const toggleAction = (idx: number) => {
@@ -119,35 +122,32 @@ export const CaseDetailsPage: React.FC = () => {
         <div className="space-y-1.5 text-xs text-slate-600 dark:text-slate-300">
           <div className="flex items-center gap-1.5">
             <MapPin className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-            <span>{report.locationName} • ~2.4 km away</span>
-          </div>
-          <div className="flex items-center justify-between text-[11px] text-slate-400 pt-1">
-            <span className="font-mono">
-              {report.latitude}° N, {report.longitude}° E
-            </span>
-            <Link to="/map" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline flex items-center gap-1">
+            <span>{report.locationName}</span>
+            <Link to="/map" className="text-emerald-600 dark:text-emerald-400 font-semibold hover:underline flex items-center gap-1 ml-auto">
               <span>View on Map</span>
-              <ExternalLink className="w-3 h-3" />
             </Link>
+          </div>
+          <div className="flex items-center gap-1.5 text-slate-400">
+            <span>Coordinates:</span>
+            <span className="font-mono">{report.latitude}, {report.longitude}</span>
           </div>
         </div>
 
-        {report.description && (
-          <p className="text-xs text-slate-700 dark:text-slate-300 pt-2 border-t border-slate-100 dark:border-slate-700/60 leading-relaxed">
-            {report.description}
-          </p>
-        )}
+        <div className="p-3 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200 dark:border-slate-800 text-xs text-slate-700 dark:text-slate-300">
+          <span className="font-bold text-slate-900 dark:text-white block mb-1">Observed Findings</span>
+          <p className="leading-relaxed">{report.description}</p>
+        </div>
       </div>
 
-      {/* AI Suggested Actions Card (Screen 6) */}
+      {/* Recommended Next Actions Checklist (Screen 6 Reference) */}
       <div className="p-4 rounded-3xl bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 shadow-sm space-y-3">
         <div className="flex items-center justify-between">
-          <h4 className="text-xs font-bold text-slate-900 dark:text-white uppercase tracking-wider flex items-center gap-1.5">
+          <h3 className="text-sm font-bold text-slate-900 dark:text-white flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-emerald-500" />
-            AI Suggested Actions
-          </h4>
-          <span className="text-[11px] text-emerald-600 font-semibold">
-            {completedActions.length}/{aiActions.length} Completed
+            Recommended Next Actions
+          </h3>
+          <span className="text-xs text-slate-400">
+            {completedActions.length}/{aiActions.length} completed
           </span>
         </div>
 
@@ -157,12 +157,11 @@ export const CaseDetailsPage: React.FC = () => {
             return (
               <button
                 key={idx}
-                type="button"
                 onClick={() => toggleAction(idx)}
-                className={`w-full text-left p-2.5 rounded-xl border text-xs flex items-start gap-2.5 transition ${
+                className={`w-full text-left p-3 rounded-2xl border text-xs font-medium flex items-start gap-2.5 transition ${
                   isDone
-                    ? 'border-emerald-300 bg-emerald-50/60 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-300 line-through opacity-85'
-                    : 'border-slate-200 dark:border-slate-700 text-slate-800 dark:text-slate-200 hover:border-slate-300'
+                    ? 'bg-emerald-50 dark:bg-emerald-950/40 border-emerald-200 dark:border-emerald-800 text-emerald-900 dark:text-emerald-200 line-through opacity-80'
+                    : 'bg-white dark:bg-slate-900/40 border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-slate-300'
                 }`}
               >
                 {isDone ? (

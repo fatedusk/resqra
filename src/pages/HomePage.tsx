@@ -13,7 +13,6 @@ import {
   Sparkles,
   AlertTriangle,
   ChevronRight,
-  ShieldCheck,
   Activity
 } from 'lucide-react';
 import { api } from '../services/api';

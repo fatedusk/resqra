@@ -81,15 +81,56 @@ body {
   box-shadow: var(--card-shadow);
 }
 
-/* Leaflet map styles */
+/* Leaflet Map Styles & Performance Fixes */
 .leaflet-container {
   width: 100%;
   height: 100%;
   border-radius: 1rem;
   z-index: 10;
+  background: #0d1b22;
 }
 
-/* Smooth transitions */
+/* Disable generic transitions inside Leaflet to prevent tile jitter */
+.leaflet-container * {
+  transition: none !important;
+}
+
+/* Leaflet Custom DivIcon reset */
+.leaflet-div-icon,
+.custom-leaflet-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+/* Modern Leaflet Popups */
+.leaflet-popup-content-wrapper {
+  background: #ffffff;
+  color: #0f172a;
+  border-radius: 1rem !important;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25), 0 8px 10px -6px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  padding: 4px;
+}
+
+.dark .leaflet-popup-content-wrapper,
+.theme-dark .leaflet-popup-content-wrapper,
+.theme-liquid-glass .leaflet-popup-content-wrapper {
+  background: #0f2026;
+  color: #f8fafc;
+  border: 1px solid #1e3a45;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+}
+
+.dark .leaflet-popup-tip,
+.theme-dark .leaflet-popup-tip,
+.theme-liquid-glass .leaflet-popup-tip {
+  background: #0f2026;
+}
+
+/* Smooth UI transitions */
 * {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-duration: 200ms;

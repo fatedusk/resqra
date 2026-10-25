@@ -1,4 +1,4 @@
-import { db, AnimalReport, AIAssessment, Organisation, AreaAlert } from './db';
+import { db, AnimalReport, AIAssessment, Organisation } from './db';
 
 export interface VerifyImageResult {
   animalDetected: boolean;
@@ -367,7 +367,7 @@ export class ResQraRescueAgent {
       observedEvidence: urgency.observedEvidence,
       recommendedSteps: plan.steps,
       safetyWarnings: plan.safetyWarnings,
-      isDemo: !Boolean(this.geminiKey || this.openAiKey),
+      isDemo: !(this.geminiKey || this.openAiKey),
       createdAt: new Date().toISOString()
     };
 
